@@ -17,19 +17,30 @@ No terminal. No install. Just a browser.
 3. Click **Connect repo** → search for `JanePavlenko/nagarro-skills` → connect
 4. Done — all skills load automatically
 
+You don't need to download or clone anything. Claude Code connects to the repo directly from GitHub.
+
 ---
 
-**Option B — Local (for developers who already use Claude Code CLI)**
+**Option B — Local (for developers who use Claude Code CLI)**
 
-Requires the Claude Code CLI to be installed (`npm install -g @anthropic-ai/claude-code`).
+Use this if you prefer working in your own terminal. You'll need:
+- [Git](https://git-scm.com/downloads) installed
+- Claude Code CLI installed — run once: `npm install -g @anthropic-ai/claude-code`
 
+**First time — clone the repo:**
 ```bash
 git clone https://github.com/JanePavlenko/nagarro-skills
 cd nagarro-skills
 claude
 ```
 
-> Not sure which to use? Go with Option A — it works in any browser, no setup required.
+**Next time — just open it:**
+```bash
+cd nagarro-skills
+claude
+```
+
+> **Not sure which to use?** Go with Option A — it works in any browser with zero setup.
 
 ---
 
