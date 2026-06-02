@@ -6,8 +6,8 @@ Standalone Claude skills for producing Nagarro-branded outputs — decks, posts,
 
 ## What's available
 
-> ⚠️ **All commands only work inside Claude Code** — not in regular Claude chat.
-> Connect this repo first (see Step 1), then type the `/command` to launch a skill.
+> ⚠️ **These skills only work in Claude Code.** They do not work in regular Claude chat.
+> You must connect this repo first (see Step 1 below), then type the `/command` to launch a skill.
 
 | Skill | Command | What it produces |
 |---|---|---|
@@ -17,9 +17,6 @@ Standalone Claude skills for producing Nagarro-branded outputs — decks, posts,
 | `nagarro-pptx-deck` | `/nagarro-pptx-deck` | PowerPoint `.pptx` file |
 | `nagarro-figma-deck` | `/nagarro-figma-deck` | Figma presentation deck |
 | `nagarro-email-cover` | `/nagarro-email-cover` | Email / event banner in Figma |
-
-**Why don't these work in regular Claude chat?**
-Skills are a Claude Code feature — they load from the connected repo. In regular chat, Claude has no access to them and won't apply the Nagarro brand rules automatically. You must open Claude Code and connect this repo first.
 
 ---
 
