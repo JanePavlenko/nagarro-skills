@@ -4,6 +4,22 @@ Standalone Claude skills for producing Nagarro-branded outputs — decks, posts,
 
 ---
 
+## What's available
+
+| Skill | What it produces | Works in chat? | Needs Claude Code? |
+|---|---|---|---|
+| `nagarro-linkedin-post` | LinkedIn post | ✅ Yes | — |
+| `nagarro-internal-comms` | Internal letter or announcement | ✅ Yes | — |
+| `nagarro-marketing-campaign` | Campaign strategy brief | ✅ Yes | — |
+| `nagarro-pptx-deck` | PowerPoint `.pptx` file | — | ✅ Yes |
+| `nagarro-figma-deck` | Figma presentation deck | — | ✅ Yes |
+| `nagarro-email-cover` | Email / event banner in Figma | — | ✅ Yes |
+
+> **Writing tasks** (LinkedIn, internal comms, campaigns) work in regular Claude chat — no setup needed.
+> **Design and file tasks** (decks, banners) require Claude Code because they generate files and connect to Figma.
+
+---
+
 ## How to use
 
 ### Step 1 — Open the repo in Claude Code
