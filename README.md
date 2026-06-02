@@ -8,14 +8,18 @@ Standalone Claude skills for producing Nagarro-branded outputs — decks, posts,
 
 | Skill | What it produces | Works in chat? | Needs Claude Code? |
 |---|---|---|---|
-| `nagarro-linkedin-post` | LinkedIn post | ✅ Yes | — |
-| `nagarro-internal-comms` | Internal letter or announcement | ✅ Yes | — |
-| `nagarro-marketing-campaign` | Campaign strategy brief | ✅ Yes | — |
-| `nagarro-pptx-deck` | PowerPoint `.pptx` file | — | ✅ Yes |
-| `nagarro-figma-deck` | Figma presentation deck | — | ✅ Yes |
-| `nagarro-email-cover` | Email / event banner in Figma | — | ✅ Yes |
+| Skill | Command to run | What it produces | Works in chat? | Needs Claude Code? |
+|---|---|---|---|---|
+| `nagarro-linkedin-post` | `/nagarro-linkedin-post` | LinkedIn post | ✅ Yes | — |
+| `nagarro-internal-comms` | `/nagarro-internal-comms` | Internal letter or announcement | ✅ Yes | — |
+| `nagarro-marketing-campaign` | `/nagarro-marketing-campaign` | Campaign strategy brief | ✅ Yes | — |
+| `nagarro-pptx-deck` | `/nagarro-pptx-deck` | PowerPoint `.pptx` file | — | ✅ Yes |
+| `nagarro-figma-deck` | `/nagarro-figma-deck` | Figma presentation deck | — | ✅ Yes |
+| `nagarro-email-cover` | `/nagarro-email-cover` | Email / event banner in Figma | — | ✅ Yes |
 
-> **Writing tasks** (LinkedIn, internal comms, campaigns) work in regular Claude chat — no setup needed.
+> **How to run a skill:** type the `/command` in Claude Code and hit enter. Claude launches the skill, asks you a few questions, and produces the result.
+>
+> **Writing tasks** (LinkedIn, internal comms, campaigns) work in regular Claude chat too — just type the command or describe what you need.
 > **Design and file tasks** (decks, banners) require Claude Code because they generate files and connect to Figma.
 
 ---
