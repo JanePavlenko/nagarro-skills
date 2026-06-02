@@ -8,16 +8,28 @@ Standalone Claude skills for producing Nagarro-branded outputs — decks, posts,
 
 ### Step 1 — Open the repo in Claude Code
 
-1. Go to [claude.ai](https://claude.ai) and open **Claude Code** (the cloud version)
-2. Click **Open repo** and connect `JanePavlenko/nagarro-skills`
-3. That's it — all skills load automatically. No install, no setup.
+**Option A — Browser only (recommended for most people)**
 
-> **Local alternative:** Clone the repo and open it in Claude Code CLI.
-> ```bash
-> git clone https://github.com/JanePavlenko/nagarro-skills
-> cd nagarro-skills
-> claude
-> ```
+No terminal. No install. Just a browser.
+
+1. Go to [claude.ai](https://claude.ai)
+2. Click **Code** in the left sidebar
+3. Click **Connect repo** → search for `JanePavlenko/nagarro-skills` → connect
+4. Done — all skills load automatically
+
+---
+
+**Option B — Local (for developers who already use Claude Code CLI)**
+
+Requires the Claude Code CLI to be installed (`npm install -g @anthropic-ai/claude-code`).
+
+```bash
+git clone https://github.com/JanePavlenko/nagarro-skills
+cd nagarro-skills
+claude
+```
+
+> Not sure which to use? Go with Option A — it works in any browser, no setup required.
 
 ---
 
