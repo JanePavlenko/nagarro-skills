@@ -23,24 +23,31 @@ You don't need to download or clone anything. Claude Code connects to the repo d
 
 **Option B — Local (for developers who use Claude Code CLI)**
 
-Use this if you prefer working in your own terminal. You'll need:
-- [Git](https://git-scm.com/downloads) installed
-- Claude Code CLI installed — run once: `npm install -g @anthropic-ai/claude-code`
+Use this if you prefer working in your own terminal.
 
-**First time — clone the repo:**
+**What you need first (one-time setup):**
+- [Git](https://git-scm.com/downloads) — to download the folder from GitHub
+- Claude Code CLI — run once in your terminal: `npm install -g @anthropic-ai/claude-code`
+
+**Step 1 — Download the folder from GitHub:**
 ```bash
 git clone https://github.com/JanePavlenko/nagarro-skills
-cd nagarro-skills
-claude
 ```
+This creates a `nagarro-skills` folder on your computer with everything inside.
 
-**Next time — just open it:**
+**Step 2 — Open it in Claude Code:**
 ```bash
 cd nagarro-skills
 claude
 ```
 
-> **Not sure which to use?** Go with Option A — it works in any browser with zero setup.
+**Next time — just open the folder you already downloaded:**
+```bash
+cd nagarro-skills
+claude
+```
+
+> **Not sure which to use?** Go with Option A — it works in any browser with zero setup, no downloading needed.
 
 ---
 
