@@ -1,13 +1,13 @@
 # Nagarro Skills
 
-Standalone Claude skills for producing Nagarro-branded outputs — decks, posts, covers, campaigns, and internal comms. Each skill is self-contained: it guides you through a brief, applies the Nagarro brand automatically, and delivers a finished result.
+Standalone Claude skills for producing Nagarro-branded outputs.
+Each skill guides you through a brief, applies the Nagarro brand automatically, and delivers a finished result.
+
+**All skills run in Claude Code only.**
 
 ---
 
 ## What's available
-
-> ⚠️ **These skills only work in Claude Code.** They do not work in regular Claude chat.
-> You must connect this repo first (see Step 1 below), then type the `/command` to launch a skill.
 
 | Skill | Command | What it produces |
 |---|---|---|
@@ -24,7 +24,7 @@ Standalone Claude skills for producing Nagarro-branded outputs — decks, posts,
 
 ### Step 1 — Open the repo in Claude Code
 
-**Option A — Browser only (recommended for most people)**
+**Option A — Browser only (recommended)**
 
 No terminal. No install. Just a browser.
 
@@ -33,77 +33,56 @@ No terminal. No install. Just a browser.
 3. Click **Connect repo** → search for `JanePavlenko/nagarro-skills` → connect
 4. Done — all skills load automatically
 
-You don't need to download or clone anything. Claude Code connects to the repo directly from GitHub.
-
 ---
 
-**Option B — Local (for developers who use Claude Code CLI)**
+**Option B — Local (for developers)**
 
-Use this if you prefer working in your own terminal.
+Requires [Git](https://git-scm.com/downloads) and Claude Code CLI installed (`npm install -g @anthropic-ai/claude-code`).
 
-**What you need first (one-time setup):**
-- [Git](https://git-scm.com/downloads) — to download the folder from GitHub
-- Claude Code CLI — run once in your terminal: `npm install -g @anthropic-ai/claude-code`
-
-**Step 1 — Download the folder from GitHub:**
+**First time — download the repo:**
 ```bash
 git clone https://github.com/JanePavlenko/nagarro-skills
-```
-This creates a `nagarro-skills` folder on your computer with everything inside.
-
-**Step 2 — Open it in Claude Code:**
-```bash
 cd nagarro-skills
 claude
 ```
 
-**Next time — just open the folder you already downloaded:**
+**Next time — just open it:**
 ```bash
 cd nagarro-skills
 claude
 ```
-
-> **Not sure which to use?** Go with Option A — it works in any browser with zero setup, no downloading needed.
 
 ---
 
-### Step 2 — Tell Claude what you want
+### Step 2 — Run a skill
 
-Just describe what you need in plain language. Claude picks the right skill automatically.
+Type the `/command` and hit enter. Claude launches the skill immediately.
 
-| What you say | Skill that runs |
-|---|---|
-| "Build me a deck about Nagarro for a new client" | `nagarro-figma-deck` or `nagarro-pptx-deck` |
-| "Create a PowerPoint about our AI capabilities" | `nagarro-pptx-deck` |
-| "Make a Figma presentation for the design team" | `nagarro-figma-deck` |
-| "Create an event banner for our AI workshop" | `nagarro-email-cover` |
-| "Write a LinkedIn post about our new project" | `nagarro-linkedin-post` |
-| "Plan a campaign to promote our cloud services" | `nagarro-marketing-campaign` |
-| "Draft an all-hands email about the org change" | `nagarro-internal-comms` |
-
-You can also name the skill directly: `"Use nagarro-linkedin-post to write a post about X"`
+```
+/nagarro-linkedin-post
+/nagarro-pptx-deck
+/nagarro-figma-deck
+```
 
 ---
 
 ### Step 3 — Answer the brief questions
 
-Every skill asks you a few questions before it starts building — audience, topic, key messages, etc.
+Every skill asks a few questions before building — topic, audience, key messages, etc.
 
-You'll see a quick menu like this:
+```
+What is this post about?
+Who is the audience?
+What's the one thing you want people to take away?
+```
 
-> **Who is the audience?**
-> - New prospect — doesn't know Nagarro
-> - Existing client or partner
-> - Internal team
-> - C-suite / leadership
-
-Answer the questions, then the skill builds your deliverable.
+Answer the questions, then the skill produces your deliverable.
 
 ---
 
 ### Step 4 — Review and approve
 
-For decks and visual outputs, the skill shows you a slide plan before building:
+For decks, the skill shows a slide plan before building:
 
 ```
 PLAN:
@@ -123,104 +102,74 @@ Say **yes** to build, or tell it what to change.
 
 | Skill | What you get |
 |---|---|
-| `nagarro-figma-deck` | A new page in the Presentations Skill Figma file with all slides |
-| `nagarro-pptx-deck` | A `.pptx` file saved in the `output/` folder |
-| `nagarro-email-cover` | A Figma frame at 1400×400px, ready to export |
-| `nagarro-linkedin-post` | Copy-paste ready post text |
-| `nagarro-marketing-campaign` | A structured campaign brief with channel plan |
-| `nagarro-internal-comms` | A finished letter or email, ready to send |
+| `/nagarro-linkedin-post` | Copy-paste ready post text |
+| `/nagarro-internal-comms` | Finished letter or email, ready to send |
+| `/nagarro-marketing-campaign` | Structured campaign brief with channel plan |
+| `/nagarro-pptx-deck` | `.pptx` file saved in `output/` |
+| `/nagarro-figma-deck` | New page in the Presentations Skill Figma file |
+| `/nagarro-email-cover` | Figma frame at 1400×400px, ready to export |
 
 ---
 
-## Skills at a glance
+## Skills in detail
 
-### 🎨 nagarro-figma-deck
-Builds a branded Nagarro presentation deck in Figma. Clones slides from the official template file, populates content, and sets the footer. Follows all Nagarro design system rules.
+### 💼 `/nagarro-linkedin-post`
+Writes a LinkedIn post in the Nagarro voice — direct, human, no buzzwords. Reviews the draft against the tone of voice guide before returning the final copy.
 
-**Use when:** You need a Figma-native deck — for sharing, presenting, or handing off to design.
-
-**You'll need to provide:**
-- Deck topic and audience
-- Project/client name
-- Key messages (3–5 points)
+**You'll need:** topic, key message, purpose (win, announcement, thought leadership, etc.)
 
 ---
 
-### 📊 nagarro-pptx-deck
-Builds a branded `.pptx` using Nagarro section templates. Every slide is copied from a pre-built template file — no slides are built from scratch.
+### ✉️ `/nagarro-internal-comms`
+Writes internal letters and company-wide announcements — all-hands, org changes, leadership news, policy updates. Always leads with people, not process.
 
-**Use when:** You need a PowerPoint to send by email or present offline.
-
-**You'll need to provide:**
-- Deck topic and audience
-- Project/client name + month/year for the footer
-- Key messages (3–5 points)
+**You'll need:** what the news is, who it's going to, who is signing it
 
 ---
 
-### 🖼 nagarro-email-cover
-Creates a 1400×400px email or event banner in Figma with a deep purple gradient background — the Nagarro AI Sandbox Sessions style.
+### 📣 `/nagarro-marketing-campaign`
+Plans an external marketing campaign — audience, single message, hook options, channel plan, and a list of content to produce.
 
-**Use when:** You're sending an event invite, newsletter, or announcement and need a header image.
-
-**You'll need to provide:**
-- Event or session title (the headline)
-- Optional: category tag, date, speaker name
+**You'll need:** campaign goal, target audience, strongest proof point, channels
 
 ---
 
-### 💼 nagarro-linkedin-post
-Writes a LinkedIn post in the Nagarro Product Studio voice — direct, human, no buzzwords. Includes a self-review against the tone of voice guide before returning the final copy.
+### 📊 `/nagarro-pptx-deck`
+Builds a branded `.pptx` using Nagarro section templates. Every slide is copied from a pre-built template — nothing built from scratch.
 
-**Use when:** You need to post about a project, event, hire, or company update on LinkedIn.
-
-**You'll need to provide:**
-- Topic and key message
-- Purpose (share a win, announce something, thought leadership, etc.)
+**You'll need:** deck topic, audience, project/client name, key messages (3–5 points)
 
 ---
 
-### 📣 nagarro-marketing-campaign
-Plans an external marketing campaign — sets the audience, message, hook, proof points, and channel strategy. Returns a structured campaign brief with a content list to execute.
+### 🎨 `/nagarro-figma-deck`
+Builds a branded presentation deck in Figma. Clones slides from the official Presentations Skill template file, populates content, and sets the footer.
 
-**Use when:** You're planning a product launch, event push, or brand campaign and need a strategy before writing content.
-
-**You'll need to provide:**
-- Campaign goal
-- Target audience
-- Key proof point or story to lead with
-- Channels (LinkedIn, email, events, paid, etc.)
+**You'll need:** deck topic, audience, project/client name, key messages (3–5 points)
 
 ---
 
-### ✉️ nagarro-internal-comms
-Writes internal letters and company-wide announcements — all-hands, org changes, leadership news, policy updates, and sensitive communications. Always leads with people, not process.
+### 🖼 `/nagarro-email-cover`
+Creates a 1400×400px email or event banner in Figma — deep purple gradient, Nagarro AI Sandbox Sessions style.
 
-**Use when:** You need to communicate something to the team — big or small.
-
-**You'll need to provide:**
-- What the news is
-- Who it's going to
-- Who is signing the message
+**You'll need:** event or session title, optional category tag, date, speaker name
 
 ---
 
 ## Brand foundation
 
-All skills draw from shared docs in `brand/`. You don't need to read them — the skills do it automatically.
+All skills draw from shared docs in `brand/` — loaded automatically, you don't need to read them.
 
 | Doc | Used by |
 |---|---|
-| `brand/tone-of-voice.md` | All copy skills (LinkedIn, internal comms, marketing) |
-| `brand/design-system.md` | All visual skills (Figma deck, PowerPoint, email cover) |
-| `brand/positioning.md` | All skills — Nagarro's core message and value prop |
+| `brand/tone-of-voice.md` | LinkedIn, internal comms, marketing campaign |
+| `brand/design-system.md` | Figma deck, PowerPoint deck, email cover |
+| `brand/positioning.md` | All skills |
 
 ---
 
 ## Tips
 
-- **Be as specific as you can in your first message.** The more context you give, the fewer follow-up questions the skill needs to ask.
-- **You can say "skip" or "I'll decide later"** for any optional brief question.
-- **For decks:** always review the slide plan before approving — it's much faster to adjust the plan than to rebuild slides.
-- **For LinkedIn posts:** mention any real stats, project names, or quotes you want included — the skill won't invent them.
-- **For campaigns:** the skill returns a brief, not the finished content. Use the other skills (LinkedIn, email cover, deck) to execute it.
+- **Be specific in your first message** — the more context you give, the fewer follow-up questions
+- **For decks** — always review the slide plan before approving; faster to adjust the plan than rebuild slides
+- **For LinkedIn posts** — include any real stats, names, or quotes; the skill won't invent them
+- **For campaigns** — the skill returns a brief, not finished content; use the other skills to execute each piece
