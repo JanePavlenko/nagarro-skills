@@ -10,22 +10,6 @@ You collect a full brief before touching Figma.
 
 ---
 
-## Prerequisites — check before starting
-
-This skill requires the **Figma desktop app** with the **Claude Console plugin** installed and running.
-If the user hasn't done this yet, stop and tell them:
-
-> Before this skill can run, you need:
-> 1. Figma desktop app installed (figma.com/downloads)
-> 2. Claude Console plugin installed inside Figma (Plugins → search "Claude Console")
-> 3. Figma open with the plugin active while you run this skill
->
-> Alternatively, use `/nagarro-pptx-deck` — it has no Figma requirement.
-
-Do not proceed until the user confirms Figma is open and the plugin is running.
-
----
-
 ## Brand anchor
 
 Before collecting the brief or building anything, read:
@@ -88,7 +72,9 @@ Present the slide plan and wait for explicit approval before touching Figma.
 
 ## Step 4 — Build in Figma
 
-Use the `use_figma` MCP tool to execute a JavaScript build script against the Presentations Skill file.
+Use the `mcp__figma-console__figma_execute` tool to execute a JavaScript build script against the Presentations Skill file.
+
+Before calling `figma_execute`, ensure the correct file is open in Figma by calling `mcp__figma-console__figma_list_open_files` and navigating to file key `LcZfBeKL7RcjQH4bqhi4Na` if needed.
 
 ### Key technical rules
 
@@ -139,7 +125,7 @@ function kids(node) {
 
 ## Step 5 — Verify
 
-After executing, take a screenshot of the deck page and confirm:
+After executing, call `mcp__figma-console__figma_take_screenshot` to capture the deck page and confirm:
 - Correct slide count
 - No placeholder text visible
 - Footer populated on every slide

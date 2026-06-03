@@ -149,21 +149,12 @@ Builds a branded presentation deck in Figma. Clones slides from the official Pre
 
 **You'll need:** deck topic, audience, project/client name, key messages (3–5 points)
 
-> **Prerequisites — required before this skill will work:**
-> 1. Install the **Figma desktop app** (not the browser version) from [figma.com/downloads](https://www.figma.com/downloads/)
-> 2. Inside Figma, open the Plugins menu → search for **Claude Console** → install it
-> 3. Keep Figma open and the plugin running while you use this skill in Claude Code
->
-> Without these steps, the skill will fail immediately. The PPT skill (`/nagarro-pptx-deck`) has no such requirement and is the recommended alternative if you don't want to set up Figma.
-
 ---
 
 ### 🖼 `/nagarro-email-cover`
 Creates a 1400×400px email or event banner in Figma — deep purple gradient, Nagarro AI Sandbox Sessions style.
 
 **You'll need:** event or session title, optional category tag, date, speaker name
-
-> **Prerequisites:** same as `/nagarro-figma-deck` above — Figma desktop app + Claude Console plugin.
 
 ---
 
