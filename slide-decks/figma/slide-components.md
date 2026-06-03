@@ -17,11 +17,25 @@ A content card with a title, body text, and an optional icon. Used as the base u
 | `Icon=true` | `3620:1140` | 547 × 290 px | Primary choice — icon adds visual hierarchy |
 | `Icon=false` | `3620:1421` | 547 × 194 px | Dense layouts (8+ cards, narrow columns) |
 
-**Anatomy:**
-- Background: `#eff1f4`, border-radius 8px, padding 8px × 27px
-- Icon: 80 × 80 px (top)
+**Anatomy (native component):**
+- Background: `#eff1f4`, border-radius 8px
+- Icon: 80 × 80 px (top, Icon=true variant only)
 - Title: 34px Equip Extended Medium, `#010716`
 - Body: 20px Equip Regular, `#535457`, line-height 1.4
+
+**Production layout (when used on a slide — overrides native padding):**
+| Property | Value | Notes |
+|---|---|---|
+| Card width | 547 px | Native, no resize |
+| Padding horizontal (`PAD_X`) | 40 px | left = right |
+| Padding top (`PAD_TOP`) | 36 px | |
+| Padding bottom (`PAD_BOTTOM`) | 56 px | Intentionally larger than top — breathing room below body |
+| Gap title → body (`GAP_TB`) | 12 px | |
+| Title text auto-resize | `HEIGHT` (hug) | Width fixed to `547 − 2·PAD_X = 467 px` |
+| Body text auto-resize | `HEIGHT` (hug) | Same fixed width |
+| Card height | computed | `PAD_TOP + max(titleH) + GAP_TB + max(bodyH) + PAD_BOTTOM` across the row |
+
+> Every card in a row gets the **same height** (the tallest card's computed height). Title and body inside each card stay at the same y so the row reads as a clean grid even when titles wrap to different line counts.
 
 ---
 
@@ -228,6 +242,78 @@ place(procCard,  frame, 98,   395, 577, 290); // Step 1 (with arrow)
 place(procCard,  frame, 687,  395, 577, 290); // Step 2 (with arrow)
 place(cardTrue,  frame, 1276, 395, 547, 290); // Step 3 (no arrow)
 ```
+
+---
+
+## Card Row Builder — Hug Text + Match Tallest
+
+The reusable pattern for **any 3/4/6 card row**: clone a base content template, place card instances, detach them so inner layers can be repositioned, force title + body to hug their content, then resize every card to the row's tallest height.
+
+```javascript
+// Constants (the production layout above)
+const CARD_W      = 547;
+const PAD_X       = 40;
+const PAD_TOP     = 36;
+const PAD_BOTTOM  = 56;
+const GAP_TB      = 12;   // title → body
+const GAP_COL     = 24;   // between cards in a row
+const innerW      = CARD_W - 2 * PAD_X;
+
+// 1) Preload fonts once
+for (const [fam, st] of [
+  ["Equip Extended","Medium"],
+  ["Equip","Regular"],
+]) await figma.loadFontAsync({ family: fam, style: st });
+
+// 2) For each card instance: detach, set content, hug both texts
+async function prepareCard(inst, titleText, bodyText) {
+  const frame = inst.detachInstance();          // unlock inner layers
+  const texts = [];
+  (function walk(n){ if (n.type === "TEXT") texts.push(n); if ("children" in n && Array.isArray(n.children)) n.children.forEach(walk); })(frame);
+  texts.sort((a,b) => (b.fontSize===figma.mixed?0:b.fontSize) - (a.fontSize===figma.mixed?0:a.fontSize));
+  const [title, body] = texts;
+
+  await setText(title, titleText);
+  await setText(body,  bodyText);
+
+  for (const t of [title, body]) {
+    t.textAutoResize = "NONE";
+    t.resize(innerW, t.height);
+    t.textAutoResize = "HEIGHT";
+    // Re-set characters to force a layout pass so .height is accurate
+    const c = t.characters; t.characters = c + " "; t.characters = c;
+  }
+  return { frame, title, body };
+}
+
+// 3) After all cards prepared, resize each to the row's tallest height
+const items = /* array of prepareCard results, in row order */;
+const titleH = Math.max(...items.map(i => i.title.height));
+const bodyH  = Math.max(...items.map(i => i.body.height));
+const cardH  = PAD_TOP + titleH + GAP_TB + bodyH + PAD_BOTTOM;
+
+const totalW = items.length * CARD_W + (items.length - 1) * GAP_COL;
+const xStart = Math.round((1920 - totalW) / 2);
+
+items.forEach(({ frame, title, body }, i) => {
+  frame.resize(CARD_W, cardH);
+  frame.x = xStart + i * (CARD_W + GAP_COL);
+  // y is set by the slide layout
+  title.x = PAD_X; title.y = PAD_TOP;
+  body.x  = PAD_X; body.y  = PAD_TOP + titleH + GAP_TB;
+});
+
+async function setText(t, value) {
+  if (t.fontName === figma.mixed) {
+    for (let i = 0; i < t.characters.length; i++) await figma.loadFontAsync(t.getRangeFontName(i, i+1));
+  } else { await figma.loadFontAsync(t.fontName); }
+  t.characters = value;
+}
+```
+
+**Why detach?** Figma blocks repositioning the inner layers of a live component instance (`This property cannot be overridden in an instance`). Detaching converts the instance into a regular frame whose children can be moved. Visual styling is preserved; only the component link is broken. This is acceptable because the source-of-truth styling lives in *this* doc — re-runs reproduce identical output from the same constants.
+
+**Why re-set `.characters`?** Setting `textAutoResize = "HEIGHT"` doesn't always force an immediate reflow; reading `.height` can return the previous fixed height. Writing characters again (`c + " "` then `c`) triggers Figma's text engine to recompute, after which `.height` is accurate.
 
 ---
 

@@ -59,6 +59,7 @@ A reference slide with:
 
 - **Never `figma.createFrame()` a slide from scratch.** Always **clone a base content template frame** (see "Base Content Frames" in [`slide-components.md`](../figma/slide-components.md)) and populate it. The template owns the brand chrome (logo, fonts, footer, background) — recreating it manually loses fidelity every time.
 - **Never** draw cards with `figma.createRectangle()` + text. Always use the Card components.
+- **Card row layout is fixed** — use the constants and the *Card Row Builder* code block in [`slide-components.md`](../figma/slide-components.md). The pattern is: clone template → detach card instances → set text → hug title + body (`textAutoResize = "HEIGHT"`, re-write characters to force reflow) → resize every card to the row's tallest height. Padding: **40 / 36 / 56** (X / top / bottom), title→body gap **12 px**, column gap **24 px**.
 - **Never** invent sizes. The widths/heights/gaps in `slide-components.md` are the source of truth.
 - **Native size first** — only resize when the count requires it (4-step process, 4/8-section grids).
 - **Process = arrows** (Process Card with the built-in arrow). Grid = no arrows (plain Card Section).
