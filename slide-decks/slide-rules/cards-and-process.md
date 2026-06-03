@@ -57,6 +57,7 @@ A reference slide with:
 
 ## Hard rules
 
+- **Never `figma.createFrame()` a slide from scratch.** Always **clone a base content template frame** (see "Base Content Frames" in [`slide-components.md`](../figma/slide-components.md)) and populate it. The template owns the brand chrome (logo, fonts, footer, background) — recreating it manually loses fidelity every time.
 - **Never** draw cards with `figma.createRectangle()` + text. Always use the Card components.
 - **Never** invent sizes. The widths/heights/gaps in `slide-components.md` are the source of truth.
 - **Native size first** — only resize when the count requires it (4-step process, 4/8-section grids).

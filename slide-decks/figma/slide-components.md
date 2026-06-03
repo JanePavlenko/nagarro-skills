@@ -62,6 +62,28 @@ Three `Card Section (Icon=true)` instances in a horizontal row. The pre-built 3-
 
 ---
 
+## Base Content Frames (clone, never recreate)
+
+Cards and process steps are **dropped into a cloned template frame**, never onto a bare `figma.createFrame()`. The template owns the background, scribble, Nagarro logo, title/subtitle text styles, and footer — recreating those manually loses brand fidelity.
+
+| Use case | Template frame | Node ID | Notes |
+|---|---|---|---|
+| Cards or process slide with title + supporting line | `Content - Title + Body / Light` | `3139:797` | Has `content-title` (64pt), `content-subtitle` (24pt), `body-block` (clear and replace with cards), `Footer` instance |
+
+**Key inner layers (by name):**
+- `content-title` — H1, Equip Extended, 64pt
+- `content-subtitle` — supporting line, Equip Regular, 24pt
+- `body-block` / `content-body` — placeholder body text; **clear it** before placing cards
+- `Footer` — instance with 3 cells: "Digital Design Strategy" / project name / month year
+
+**Workflow:**
+1. `const base = await figma.getNodeByIdAsync("3139:797"); const slide = base.clone();`
+2. Populate `content-title`, `content-subtitle`, and the 3 footer cells.
+3. Clear the body placeholder text.
+4. Place Card Section / Process Card instances at the coordinates in this doc.
+
+---
+
 ## Process Slides
 
 ### Rule: Process Step Layout
