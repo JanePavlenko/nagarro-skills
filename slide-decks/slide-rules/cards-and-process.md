@@ -55,6 +55,19 @@ A reference slide with:
 
 ---
 
+## Statement / conclusion slides
+
+When the slide is **just a headline + one supporting sentence** — manifestos, theses, section transitions, closing statements — do **not** use the Content template with the card grid. Use the dedicated **Conclusions / Statement Slide** component (`3705:722`, default variant `3705:721`) from [`slide-components.md`](../figma/slide-components.md).
+
+Triggers:
+- The pptx / reference has a slide with only an H1 and 1 paragraph, no cards, no diagrams
+- The user asks for a "thesis", "manifesto", "method", "closing statement", or "transition" slide
+- Examples from real decks: *"Focused discovery. Evidence-led experience alignment."*, *"Connect can become the front door."*
+
+Populate by layer name: `quote` (the headline) and `attribution` (the supporting sentence). Set the footer 3 cells as usual.
+
+---
+
 ## Hard rules
 
 - **Never `figma.createFrame()` a slide from scratch.** Always **clone a base content template frame** (see "Base Content Frames" in [`slide-components.md`](../figma/slide-components.md)) and populate it. The template owns the brand chrome (logo, fonts, footer, background) — recreating it manually loses fidelity every time.

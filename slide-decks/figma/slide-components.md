@@ -55,6 +55,55 @@ A Card Section with a directional arrow appended to the right. Represents one st
 
 ---
 
+### Conclusions / Statement Slide — `3705:722` (COMPONENT_SET)
+
+A full-bleed dark slide used for short, declarative statements: a single big headline + one supporting paragraph. No cards, no diagrams. Use when the message is the slide — e.g. transition / manifesto / closing point.
+
+| Variant | Node ID | Size | Use when |
+|---|---|---|---|
+| `Property 1=Default` | `3705:721` | 1920 × 1080 px | The only variant — dark teal gradient with scribble texture |
+
+**Anatomy:**
+- Background: dark teal gradient + scribble + tint (managed by inner `Layout` instance)
+- Nagarro logo top-left at (84, 64)
+- `quote-block` frame at **(90, 287)**, 1736 × 334 px, containing:
+  - `quote` (TEXT, name) — the big white headline, 1736 × 192 px, large Equip Extended at 80pt+
+  - `attribution` (TEXT, name) — supporting paragraph, sits at y=240 inside quote-block, 1736 × 94 px, lighter Equip Regular
+- Footer instance at (84, 968) — populate the 3 cells (Digital Design Strategy / Project Name / Month Year)
+
+**When to use this layout:**
+- Manifesto / thesis / closing-statement slides — a single bold idea
+- Section transitions where you want pause and emphasis
+- "Method" or "Approach" framing slides between content blocks
+
+> Examples: "Focused discovery. Evidence-led experience alignment." / "Connect can become the front door." / "We use available evidence … to build a practical recommendation."
+
+**How to use (fetch + populate):**
+```javascript
+// 1. Fetch the variant directly (or .createInstance() on the component set)
+const stmt = await figma.getNodeByIdAsync("3705:721");
+const slide = stmt.clone();              // never edit the source
+slide.x = slideIndex * 2020; slide.y = 0;
+page.appendChild(slide);
+
+// 2. Populate text by layer name
+const quote       = findByName(slide, "quote");
+const attribution = findByName(slide, "attribution");
+await setText(quote, "Your big headline. Two short sentences.");
+await setText(attribution, "One supporting paragraph that gives context and turns the headline into a takeaway.");
+
+// 3. Footer (3 cells inside the Footer instance)
+populateFooter(slide, ["Digital Design Strategy", "Project Name", "June 2026"]);
+```
+
+**Rules:**
+- **Always fetch this component** for statement / conclusion / manifesto slides — do not recreate the dark gradient by hand.
+- Quote text: keep it to **1–2 short sentences** (≤ ~12 words each). The font is 80pt+; long text wraps badly.
+- Attribution text: **1 sentence**, ≤ 25 words. It's the "so what" of the headline.
+- Do not add cards, diagrams, or additional content blocks to this layout. If you need supporting structure, use the `Content - Title + Body / Light` template instead.
+
+---
+
 ### Card Section / Set of Cards — `3620:1204` (COMPONENT)
 
 Three `Card Section (Icon=true)` instances in a horizontal row. The pre-built 3-card layout.
