@@ -68,6 +68,11 @@ Never place a Diagram slide unless the brief contains real content for every vis
 Diagrams with placeholder nodes ("Title", "Bullet Point 1") are rejected.
 Drop or substitute with a text-based slide.
 
+### Cards & process slides rule
+When the brief, a reference image, or a user description implies **N parallel items** (3/4/6/8) or **a sequence of steps**, do **not** draw boxes by hand. Read [`slide-decks/slide-rules/cards-and-process.md`](../../../slide-decks/slide-rules/cards-and-process.md) and use the Card components from [`slide-decks/figma/slide-components.md`](../../../slide-decks/figma/slide-components.md). The doc maps every count (3/4/6/8) and process length to a component, node ID, and exact x/y/w/h.
+
+Triggers include: "process", "steps", "stages", "phases", "flow", "pillars", "proof points", "journeys", "value props", or any reference slide showing N equal-weight cards in a row or grid.
+
 ### No placeholder copy
 Every text layer must contain real content. Never ship:
 `Lorem ipsum`, `Title`, `Subtitle`, `Bullet Point 1/2/3`, `This is a paragraph`,
