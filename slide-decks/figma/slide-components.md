@@ -90,6 +90,11 @@ Cards and process steps are **dropped into a cloned template frame**, never onto
 - `body-block` / `content-body` — placeholder body text; **clear it** before placing cards
 - `Footer` — instance with 3 cells: "Digital Design Strategy" / project name / month year
 
+**Anchor position (title-on-top layouts):**
+- `content-area` frame is anchored at **(x = 90, y = 164)** in slide coordinates.
+- After cloning the template, explicitly set `contentArea.x = 90; contentArea.y = 164;` — the default template position can drift; pin it.
+- This puts the H1 at y = 164, supporting line at y ≈ 260, leaving the rest of the slide for cards/diagrams.
+
 **Workflow:**
 1. `const base = await figma.getNodeByIdAsync("3139:797"); const slide = base.clone();`
 2. Populate `content-title`, `content-subtitle`, and the 3 footer cells.
