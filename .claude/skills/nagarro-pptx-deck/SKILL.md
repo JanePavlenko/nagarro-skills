@@ -17,7 +17,10 @@ Before collecting the brief or building anything, read:
 - `brand/positioning.md` — Nagarro's core message and value proposition
 
 Section template files live at:
-`slide-decks/powerpoint/sections/` (in the nagarro-copilot-team repo)
+`slide-decks/powerpoint/sections/` (in this repo — all 16 .pptx files are present)
+
+Per-slide layout rules live at:
+`slide-decks/powerpoint/rules/` — read the relevant `.md` file before placing each slide type.
 
 ---
 
@@ -98,7 +101,7 @@ from pptx import Presentation
 from pptx.opc.package import Part
 from pptx.opc.packuri import PackURI
 
-SECTIONS = 'path/to/slide-decks/powerpoint/sections'
+SECTIONS = 'slide-decks/powerpoint/sections'
 _img_counter = itertools.count(1)
 
 def copy_slide_from(src_path, slide_idx, dst_prs):
