@@ -53,6 +53,10 @@ A Card Section with a directional arrow appended to the right. Represents one st
 
 > Use this for every step **except the last** in a process sequence. The last step is always a plain `Card Section (Icon=true)`.
 
+**Resize gotcha:** Process Card instances default to **HUG sizing horizontally** — calling `inst.resizeWithoutConstraints(418, h)` does nothing until you also set `inst.layoutSizingHorizontal = "FIXED"`. After resize, the inner Card Section's `Container` frame may still be sized for the native 547, so body text can clip on the right. To reflow text properly, find the title + body TEXT nodes and set their width explicitly: `t.textAutoResize = "NONE"; t.resize(innerW, t.height); t.textAutoResize = "HEIGHT";` then re-write `t.characters` to force a layout pass.
+
+**Before / After pairs (e.g. "current effort pattern" vs "target experience pattern"):** Stack two 4-step rows on one slide. Each row = 3 × Process Card + 1 × Card Section. Add a small label caption above each row (Equip Extended Medium 22pt, muted gray for "current", Petrol Black for "target"). Drop the Statement Bar — the pattern contrast is the takeaway.
+
 ---
 
 ### Conclusions / Statement Slide — `3705:722` (COMPONENT_SET)

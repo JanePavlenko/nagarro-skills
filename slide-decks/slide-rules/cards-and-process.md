@@ -55,6 +55,14 @@ A reference slide with:
 
 ---
 
+## Before / After flows
+
+When a slide shows two parallel N-step sequences (a "current pattern" vs "target pattern", "before" vs "after"), use the **Process Card** (`3620:1243`) + **Card Section Icon=true** (`3620:1140`) recipe from [`slide-components.md`](../figma/slide-components.md) — **not** two Progress Banners stacked.
+
+Two rows, each with 3 Process Cards + 1 Card Section (resized to 418 / 388 px). Hide the default 80×80 icon inside each card. Caption each row (muted gray for "current", Petrol Black for "target"). Drop the Statement Bar — the contrast is the takeaway.
+
+---
+
 ## Tables (decision matrices, comparison grids)
 
 When source content reads as **header row + N data rows × M columns** — decision matrices, comparison grids, attribute breakdowns — use the **Table** component (`3734:2374`) from [`slide-components.md`](../figma/slide-components.md). **Never simulate a table with cards.**
