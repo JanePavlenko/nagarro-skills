@@ -10,6 +10,22 @@ You collect a full brief before touching Figma.
 
 ---
 
+## Prerequisites — check before starting
+
+This skill requires the **Figma desktop app** with the **Claude Console plugin** installed and running.
+If the user hasn't done this yet, stop and tell them:
+
+> Before this skill can run, you need:
+> 1. Figma desktop app installed (figma.com/downloads)
+> 2. Claude Console plugin installed inside Figma (Plugins → search "Claude Console")
+> 3. Figma open with the plugin active while you run this skill
+>
+> Alternatively, use `/nagarro-pptx-deck` — it has no Figma requirement.
+
+Do not proceed until the user confirms Figma is open and the plugin is running.
+
+---
+
 ## Brand anchor
 
 Before collecting the brief or building anything, read:
