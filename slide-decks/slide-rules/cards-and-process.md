@@ -55,6 +55,16 @@ A reference slide with:
 
 ---
 
+## Progress banner (horizontal chevron flow)
+
+When a slide shows a **horizontal chain of 2–6 short labels** connected by chevrons — stage flows, journey phases, architecture layers, process spines — use the **Progress Banner** component (`3706:1378`) from [`slide-components.md`](../figma/slide-components.md). **Never draw chevrons or the dark banner by hand.**
+
+Pick the variant by stage count: `cols=2/3/4/5/6` (node IDs in the components doc). Labels are short noun phrases (1–4 words); longer descriptions go in cards below the banner.
+
+Triggers: pptx slides that show patterns like *"Identity → Role → Entitlement → Brand → Order → Action"*, *"AEM → Context → API → Telemetry"*, *"Discover → Define → Decide"*, or any architecture/process slide with chevron arrows between named stages.
+
+---
+
 ## Statement bar (closing takeaway on a content slide)
 
 When a content slide ends with a single emphatic sentence — *"Workshop decision: …"*, *"Recommended first slice: …"*, *"Output: …"*, *"Result: …"* — use the **Statement Bar** component (`3718:1384`) from [`slide-components.md`](../figma/slide-components.md). **Never recreate the dark bar by hand.**

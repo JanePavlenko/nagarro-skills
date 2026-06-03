@@ -151,6 +151,54 @@ if (t.height > 40) {
 
 ---
 
+### Progress Banner — `3706:1378` (COMPONENT_SET)
+
+A full-width dark banner showing a horizontal flow of **2–6 labels separated by chevrons**. Use it for stage-flow lines, process / phase / journey sequences, and architecture-layer pipelines that read as `A → B → C → …`. Sits at the top or middle of a content slide.
+
+| Variant | Node ID | Size | Use when |
+|---|---|---|---|
+| `cols=2` | `3706:1373` | 1752 × 110 px | Two stages (e.g. *Before → After*) |
+| `cols=3` | `3706:1377` | 1752 × 141 px | Three phases (e.g. *Discover → Define → Decide*) |
+| `cols=4` | `3706:1376` | 1752 × 172 px | Four-layer architecture (e.g. *AEM → Context → API → Telemetry*) |
+| `cols=5` | `3706:1374` | 1752 × 203 px | Five-step process |
+| `cols=6` | `3706:1372` | 1752 × 265 px | Six-stage chain (e.g. *Identity → Role → Entitlement → Brand → Order → Action*) |
+
+**Anatomy:**
+- Background: `#01070E` (Petrol Black), border-radius **5 px**
+- Layout: HORIZONTAL auto-layout, padding **24 top/bottom, 16 left/right**, itemSpacing **8 px**
+- Children alternate: `col1`, `chevron-right` (24×24), `col2`, `chevron-right`, `col3`, …, `colN`
+- Each `colN` is a TEXT layer, **Equip Regular 24pt white**, left-aligned, auto line-height
+- Column heights grow with content — that's why the variant heights differ (cols=2 → 110, cols=6 → 265)
+
+**Anchor in a content slide:**
+- x = **84** (full slide-margin width = 1752)
+- y depends on slide composition: pair with a title block above and optionally cards/diagram below. A common placement is y ≈ 410 when used as the main visual element of the slide.
+
+**How to use:**
+```javascript
+const labels = ["Identity", "Role", "Entitlement", "Brand", "Project/order", "Next action"];
+const variantId = {2:"3706:1373",3:"3706:1377",4:"3706:1376",5:"3706:1374",6:"3706:1372"}[labels.length];
+const comp = await figma.getNodeByIdAsync(variantId);
+const inst = comp.createInstance();
+slide.appendChild(inst);
+inst.x = 84; inst.y = 410;
+
+// Populate each col-N text by name
+for (let i = 0; i < labels.length; i++) {
+  const t = inst.findOne(n => n.type === "TEXT" && n.name === `col${i+1}`);
+  if (t) await setText(t, labels[i]);
+}
+```
+
+**Rules:**
+- **Always fetch this component** when a slide has a chevron-separated horizontal flow — do not draw the chevrons or the banner manually.
+- Pick the variant by **stage count**. 7+ stages → break into two banners or rethink the slide; don't squeeze into cols=6.
+- Each column label should be a **short noun phrase** (1–4 words). For longer per-stage descriptions, put them in cards *below* the banner — the banner is the spine, not the body.
+- One progress-banner per slide. If you need a sub-process flow, use cards or numbered chips instead.
+- Pairs well with: the Statement Bar (`3718:1384`) below, or a Card Section row above/below for per-stage detail.
+
+---
+
 ### Card Section / Set of Cards — `3620:1204` (COMPONENT)
 
 Three `Card Section (Icon=true)` instances in a horizontal row. The pre-built 3-card layout.
