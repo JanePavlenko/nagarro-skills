@@ -287,6 +287,73 @@ const hiddenRows = allRows.filter(n => !n.visible);
 
 ---
 
+### Table — `3734:2374` (COMPONENT_SET)
+
+A multi-row, multi-column table for decision matrices, comparison grids, and tabular data. Use it whenever the source content reads as `Header row + N data rows × M columns` — never simulate a table with cards.
+
+| Variant | Node ID | Size (native) | Use when |
+|---|---|---|---|
+| `cols=1` | `3736:2455` | 420 × 344 px | Single-column list with a heading |
+| `cols=2` | `3736:2415` | 864 × 416 px | Two-column comparison |
+| `cols=3` | `3734:2375` | 1308 × 416 px | Decision matrix (most common) |
+| `cols=4` | `3734:2170` | 1752 × 416 px | Four-attribute breakdown |
+
+**Cell component:** `table-items` (`3734:2120`)
+- `type=table-title` (`3734:2119`) — header cell, 420×32, Equip Extended Regular 24pt
+- `type=table-item`  (`3734:2118`) — data cell, 420×24, Equip Regular 20pt
+
+**Anatomy:**
+- Layout: VERTICAL auto-layout, itemSpacing **24 px** (compress to **12 px** if many rows)
+- Children alternate: `top-table-row` (header, 32 px tall) → `table-line` (separator) → `table-row` (data, 48 px tall) → `table-line` → …
+- Each row is a HORIZONTAL frame containing N `table-items` instances (one per column)
+- **8 data rows are pre-baked** in the component; only the first 4 are visible by default. Show / hide rows by setting `.visible` to control row count.
+
+**Anchor in a content slide:**
+- x = **84** if using full content width (resize instance to 1752); otherwise center the native width
+- y = **440** (clears subtitle); itemSpacing 12 keeps a 5-row table under the footer
+
+**How to use:**
+```javascript
+const tableCols = { 1: "3736:2455", 2: "3736:2415", 3: "3734:2375", 4: "3734:2170" };
+const cols = headers.length;                  // headers + dataRows[][]
+const tbl = (await figma.getNodeByIdAsync(tableCols[cols])).createInstance();
+slide.appendChild(tbl);
+tbl.resize(1752, tbl.height);                 // optional: stretch to full content width
+tbl.x = 84; tbl.y = 440;
+tbl.itemSpacing = 12;                         // optional: tighter rows when 5+ data rows
+
+const rows = tbl.children.filter(c => c.type === "FRAME" && (c.name === "top-table-row" || c.name === "table-row"));
+const lines = tbl.children.filter(c => c.type === "VECTOR" && c.name === "table-line");
+
+// Header
+rows[0].visible = true;
+const headerCells = rows[0].children.filter(c => c.type === "INSTANCE");
+for (let i = 0; i < cols; i++) await setText(headerCells[i].findOne(n => n.type === "TEXT"), headers[i]);
+
+// Data rows — make visible AND populate; hide the rest
+const dataRows = rows.slice(1);
+for (let r = 0; r < dataRows.length; r++) {
+  if (r < dataRows[r] && r < data.length) {
+    dataRows[r].visible = true;
+    const cells = dataRows[r].children.filter(c => c.type === "INSTANCE");
+    for (let i = 0; i < cols; i++) await setText(cells[i].findOne(n => n.type === "TEXT"), data[r][i]);
+  } else {
+    dataRows[r].visible = false;
+  }
+}
+// Hide separator lines past the last visible data row
+for (let i = 0; i < lines.length; i++) lines[i].visible = i < data.length;
+```
+
+**Rules:**
+- **Always fetch this component** for any tabular content (decision matrices, comparison grids, attribute breakdowns). Do **not** simulate a table with 5+ cards.
+- **Make rows visible explicitly** — only the first 4 data rows are visible in the native variant; setting `.visible = true` on the rest is required.
+- For 5+ data rows, set `itemSpacing = 12` to keep the table under the footer (y=968).
+- If the table content is the takeaway, **drop the Statement Bar** from that slide — tables don't need a closing punctuation line.
+- Pair well with: a content slide template; not with statement slides or the Conclusions component.
+
+---
+
 ### Card Section / Set of Cards — `3620:1204` (COMPONENT)
 
 Three `Card Section (Icon=true)` instances in a horizontal row. The pre-built 3-card layout.

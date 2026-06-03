@@ -55,6 +55,16 @@ A reference slide with:
 
 ---
 
+## Tables (decision matrices, comparison grids)
+
+When source content reads as **header row + N data rows × M columns** — decision matrices, comparison grids, attribute breakdowns — use the **Table** component (`3734:2374`) from [`slide-components.md`](../figma/slide-components.md). **Never simulate a table with cards.**
+
+Pick the variant by column count: `cols=1/2/3/4` (node IDs in the components doc). Make rows explicitly visible (only 4 are visible by default in the source). For 5+ data rows, set `itemSpacing = 12`. Drop the Statement Bar from table slides — the table is the takeaway.
+
+Triggers: a slide showing a header bar like *"Decision | Examples | Workshop question"* followed by rows; *"Before | After"* attribute pairs; *"Capability | What it does | Owner"* breakdowns.
+
+---
+
 ## Progress banner (horizontal chevron flow)
 
 When a slide shows a **horizontal chain of 2–6 short labels** connected by chevrons — stage flows, journey phases, architecture layers, process spines — use the **Progress Banner** component (`3706:1378`) from [`slide-components.md`](../figma/slide-components.md). **Never draw chevrons or the dark banner by hand.**
