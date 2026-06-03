@@ -90,10 +90,45 @@ Cards and process steps are **dropped into a cloned template frame**, never onto
 - `body-block` / `content-body` — placeholder body text; **clear it** before placing cards
 - `Footer` — instance with 3 cells: "Digital Design Strategy" / project name / month year
 
-**Anchor position (title-on-top layouts):**
+**Anchor position (Content - Title + Body / Light):**
 - `content-area` frame is anchored at **(x = 90, y = 164)** in slide coordinates.
 - After cloning the template, explicitly set `contentArea.x = 90; contentArea.y = 164;` — the default template position can drift; pin it.
 - This puts the H1 at y = 164, supporting line at y ≈ 260, leaving the rest of the slide for cards/diagrams.
+
+---
+
+## Title Anchor Per Layout
+
+For every template, the title (or hero text) sits at a fixed slide-absolute position. After cloning a template, snap its title node / content-area to these coordinates so the deck reads consistently across slides. All values in 1920×1080 canvas coords.
+
+| Template | Anchor node | x | y | w | h | Notes |
+|---|---|---|---|---|---|---|
+| Cover - Standard / Dark | `cover-title` | 84 | 436 | 1308 | 128 | 128pt; vertical-center band |
+| Cover - Large Title, Mint / Dark | `cover-title` | 84 | 183 | 1386 | 512 | 256pt hero |
+| Chapter Cover - Large Title Left, Number Right / Dark | `chapter-title` | 90 | 383 | 1308 | 512 | 256pt |
+| Chapter Cover - Vertically Centered, Number Top / Dark | `chapter-title` | 84 | 507 | 1431 | 128 | 128pt; vertical-center |
+| **Content - Title + Body / Light** | `content-area` | **90** | **164** | 1627 | 690 | H1 64pt inside |
+| Executive Summary - 2 Col Wide, Title Top + Text Bottom / Light | `exec-title` | 86 | 201 | 797 | 80 | 80pt |
+| Executive Summary - 2 Col Wide, Bottom Left / Light | `exec-title` | 84 | 386 | 1160 | 80 | 64pt; lower band |
+| Executive Summary - 3 Col, Title as First Col / Light | `title` (frame) | 84 | 354 | 568 | 160 | Title sits as first column |
+| Executive Summary - 3 Col, Title Above / Light | `exec-title` | 84 | 345 | 1751 | 80 | 64pt full width |
+| A Note From Us - Title Top, Text Bottom Left / Light | `Header` frame | 0 | 0 | 1920 | 154 | Title inside header band |
+| A Note From Us - Copy Bottom Left / Light | `note-title` | 84 | 386 | 1160 | 80 | 64pt; lower band |
+| Highlights - Quote, Centered / Light | `quote` | 232 | 286 | 1308 | 384 | 96pt; centered |
+| Highlights - Quote, Bottom Left / Light | `Header` frame | 0 | 0 | 1920 | 154 | Title inside header band |
+| About Nagarro - Stats Bubbles, Full-Width Photo / Dark | `about-title` | 256 | 500 | 1408 | 80 | 80pt; mid-slide |
+| About Nagarro - Headline + 3 Content Boxes / Light | `about-title` | 84 | 253 | 1752 | 160 | 64pt full width |
+| Why Nagarro - Headline Top, 3 Col Body / Light | `why-title` | 84 | 259 | 1224 | 160 | 64pt |
+| Why Nagarro - Headline + 2 Col Body / Light | `why-title` | 84 | 288 | 568 | 320 | 64pt; first column |
+| Outro - Tagline + Logo / Dark | `outro-headline` | 230 | 460 | 568 | 160 | 64pt; vertical-center |
+
+**How to apply:**
+1. Clone the template frame.
+2. Find the anchor node by name (`findByName(slide, "<anchor>")`).
+3. Set its `x` and `y` to the values above.
+4. Populate text content and footer as usual.
+
+> If a template's anchor isn't listed here, run the position-scan snippet (find the largest TEXT node above y=540, or any frame named `content-area` / `title-block` / `Header`) and add the row.
 
 **Workflow:**
 1. `const base = await figma.getNodeByIdAsync("3139:797"); const slide = base.clone();`
