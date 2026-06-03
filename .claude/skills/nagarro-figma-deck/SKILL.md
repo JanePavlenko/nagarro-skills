@@ -72,9 +72,7 @@ Present the slide plan and wait for explicit approval before touching Figma.
 
 ## Step 4 — Build in Figma
 
-Use the `mcp__figma-console__figma_execute` tool to execute a JavaScript build script against the Presentations Skill file.
-
-Before calling `figma_execute`, ensure the correct file is open in Figma by calling `mcp__figma-console__figma_list_open_files` and navigating to file key `LcZfBeKL7RcjQH4bqhi4Na` if needed.
+Use the `mcp__plugin_figma_figma__use_figma` tool to execute a JavaScript build script against the Presentations Skill file.
 
 ### Key technical rules
 
@@ -125,7 +123,7 @@ function kids(node) {
 
 ## Step 5 — Verify
 
-After executing, call `mcp__figma-console__figma_take_screenshot` to capture the deck page and confirm:
+After executing, call `mcp__plugin_figma_figma__get_screenshot` to capture the deck page and confirm:
 - Correct slide count
 - No placeholder text visible
 - Footer populated on every slide

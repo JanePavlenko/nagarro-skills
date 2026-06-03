@@ -199,6 +199,94 @@ for (let i = 0; i < labels.length; i++) {
 
 ---
 
+### Table — `3734:2374` (COMPONENT_SET)
+
+A structured data table with a header row and data rows separated by horizontal dividers. Variants cover **1–4 columns**; all variants ship with **8 data rows** (rows 5–8 hidden by default, 4 visible). Use for decision frameworks, feature matrices, comparison grids, or any structured multi-column data (e.g. ASSA ABLOY slides 11 and 20).
+
+**Sub-component: TableItems — `3734:2120` (COMPONENT_SET)**
+
+The reusable cell unit. Two variants, driven by the `type` property:
+
+| Variant | Node ID | Typography | Use when |
+|---|---|---|---|
+| `type=table-title` | `3734:2119` | Equip Extended Regular, 24 px, `#010716`, line-height 32 px, letter-spacing −1 px | Header row cells — column labels |
+| `type=table-item` | `3734:2118` | Equip Regular, 18 px, `#010716`, letter-spacing −0.36 px | Data row cells — body copy |
+
+Cell padding: 8 px left. Width: 420 px (fixed). Height: hug content.
+
+**Variants:**
+
+| Variant | Node ID | Columns | Total row width | Use when |
+|---|---|---|---|---|
+| `cols=4` | `3734:2170` | 4 × 420 px | **1752 px** | Full-width table — fills the 1920 px slide with 84 px margins |
+| `cols=3` | `3734:2375` | 3 × 420 px | **1308 px** | Three-column comparison or framework |
+| `cols=2` | `3736:2415` | 2 × 420 px | **864 px** | Simple two-column side-by-side |
+| `cols=1` | `3736:2455` | 1 × 420 px | **420 px** | Single-column list with dividers |
+
+Column gap: **24 px** (0 px for `cols=1`). All variants: border-radius **8 px**, layout gap between rows **24 px**. Colours use design variables — switch automatically between light and dark mode.
+
+**Row structure (same across all variants):**
+- `top-table-row` — header row (`type=table-title` cells)
+- `table-line` — horizontal rule divider
+- `table-row` × 4 (visible) + `table-row` × 4 (hidden) — data rows (`type=table-item` cells)
+
+**Anchor in a content slide:**
+- `cols=4`: x = **84**, spans full content width
+- `cols=3/2/1`: centre horizontally — `x = (1920 − totalRowWidth) / 2`
+- y: place below title, typically y ≈ **280** when `content-title` is above
+
+**How to use:**
+```javascript
+// 1. Pick variant by column count
+const variantId = { 4: "3734:2170", 3: "3734:2375", 2: "3736:2415", 1: "3736:2455" }[colCount];
+const comp = await figma.getNodeByIdAsync(variantId);
+const table = comp.clone();
+slide.appendChild(table);
+table.x = colCount === 4 ? 84 : Math.round((1920 - colCount * 420 - (colCount - 1) * 24) / 2);
+table.y = 280;
+
+// 2. Populate header cells
+const headerRow = table.findOne(n => n.name === "top-table-row");
+const headerCells = headerRow.children.filter(n => n.name === "table-items" || n.type === "INSTANCE");
+const headerLabels = ["Decision", "Examples", "Workshop question", "Owner"]; // adjust to colCount
+for (let i = 0; i < Math.min(headerCells.length, headerLabels.length); i++) {
+  const t = headerCells[i].findOne(n => n.type === "TEXT");
+  if (t) await setText(t, headerLabels[i]);
+}
+
+// 3. Populate visible data rows (first 4)
+const allRows = table.children.filter(n => n.name === "table-row");
+const visibleRows = allRows.filter(n => n.visible).slice(0, 4);
+const rowData = [
+  ["Own in Connect/AEM",     "Top tasks, resource discovery", "What must feel native?",          "Product"],
+  ["Deep-link with context", "Brand sites, webshops",         "What external tools need context?","Arch"],
+  ["Federated identity",     "SSO, CSR impersonation",        "Who manages access rules?",        "Platform"],
+  ["…",                      "…",                             "…",                                "…"],
+];
+for (let r = 0; r < visibleRows.length; r++) {
+  const cells = visibleRows[r].children.filter(n => n.name === "table-items" || n.type === "INSTANCE");
+  for (let c = 0; c < cells.length; c++) {
+    const t = cells[c].findOne(n => n.type === "TEXT");
+    if (t) await setText(t, rowData[r]?.[c] ?? "");
+  }
+}
+
+// 4. To reveal extra rows (up to 8 total): unhide the hidden table-row + table-line pairs
+const hiddenRows = allRows.filter(n => !n.visible);
+// unhide as many as needed, then populate the same way as step 3
+```
+
+**Rules:**
+- **Always fetch this component set** — never build a table manually with rectangles and text layers.
+- **Pick the variant by column count.** Don't hide columns inside a wider variant.
+- **Light and dark mode**: colours use design variables — no manual overrides needed.
+- **Row count**: 4 visible rows by default (out of 8 total). To show more rows, unhide hidden `table-row` + `table-line` pairs in order. Maximum 8 data rows — if you need more, split across two slides.
+- Keep header labels short (1–3 words). Body copy per cell: 1–2 lines max.
+- Pairs well with `content-title` above and optionally a `Statement Bar` below for a closing takeaway.
+- **Trigger this component** when slide content is a: decision framework, comparison grid, feature matrix, or any structured list that appeared as a table in the original source (PPT, doc, or brief).
+
+---
+
 ### Card Section / Set of Cards — `3620:1204` (COMPONENT)
 
 Three `Card Section (Icon=true)` instances in a horizontal row. The pre-built 3-card layout.
@@ -513,4 +601,4 @@ async function setText(t, value) {
 
 ---
 
-*Last updated: 2026-06-03*
+*Last updated: 2026-06-03 — added Table component (`3734:2170`)*
