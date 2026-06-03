@@ -231,7 +231,7 @@ The Nagarro icon set has a single, distinctive style:
 - **Stroke weight:** medium-heavy (~3–4 px at 100 px frame size) with rounded caps/joins.
 
 ### 4.2 Available icons (60 files supplied)
-All icons are stored as SVG in `brand/icons/`. Use these exact filenames (without `.svg`) when referencing an icon in a brief.
+All icons are stored as PNG in `brand/assets/icons/`. Use these exact filenames (without `.png`) when referencing an icon in a brief.
 
 People & motion — `User`, `People`, `Person Upside Down`, `Dance`, `Sprint`, `Problem`, `Heart`, `Iterate`, `Loop`, `Tornado`, `Spring`
 
@@ -263,7 +263,7 @@ Every supplied SVG uses exactly two colors, matching §4.1:
 The Designer agent must use these files as supplied — do not recolor.
 
 ### 4.2.2 Source files
-60 files in `brand/icons/`. ViewBox sizes vary (most are 100 × 100; some non-square: 100 × 113, 100 × 115, 100 × 132, 120 × 100) — preserve each file's native aspect ratio when placing in a slide.
+Files in `brand/assets/icons/`. Preserve each file's native aspect ratio when placing in a slide.
 
 ### 4.3 Iconography do's and don'ts
 - ✅ Use only icons from the BDS Icons page. Do not import from other libraries (Material, Carbon, Font Awesome, etc.).
@@ -325,7 +325,7 @@ The Designer agent must use these files as supplied — do not recolor.
 ### 6.5 Pairing with brand elements
 - ✅ Photo + Mint accent (a thin Mint rule, a Mint icon-pill, a Mint CTA) — preferred combination.
 - ✅ Photo + Nightfall Blue text overlay on white margin — preferred for hero quotes over imagery.
-- ❌ Don't place brand icons (`brand/icons/*`) directly on top of photos; icons live on white / Limestone backgrounds.
+- ❌ Don't place brand icons (`brand/assets/icons/*`) directly on top of photos; icons live on white / Limestone backgrounds.
 - ❌ Don't use a photo as the background of a slide that already has a chart, table, or diagram. One visual idea per slide.
 
 ### 6.6 Illustration
@@ -535,5 +535,5 @@ Each archetype lists: **name** — purpose — **reference slide(s)** in the tem
 - PowerPoint template: `templates/powerpoint/nagarro-deck.pptx` (63 example slides, 1 master layout `DEFAULT`, canvas 20.125 × 11.25 in).
 - Fonts: `brand/fonts/Equip/` (16 styles) and `brand/fonts/Equip-Extended/` (16 styles). All 32 also installed in `~/Library/Fonts/` so PowerPoint resolves `Equip` / `Equip Extended` natively.
 - Logo SVGs: `brand/logo/Nagarro {Horizontal|Vertical} {Light|Dark}.svg` (4 files).
-- Icon SVGs: `brand/icons/*.svg` (60 files, all on `#E0E3E8` pill with `#13294B` strokes).
+- Icons: `brand/assets/icons/*.png` — background PNGs also at `brand/assets/nagarro-bg-dark.png` and `brand/assets/nagarro-bg-light.png`.
 - Local cached screenshots: `brand/.figma-cache/*.png` (gitignored).
