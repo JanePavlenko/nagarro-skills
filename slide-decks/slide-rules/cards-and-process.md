@@ -55,6 +55,16 @@ A reference slide with:
 
 ---
 
+## Statement bar (closing takeaway on a content slide)
+
+When a content slide ends with a single emphatic sentence — *"Workshop decision: …"*, *"Recommended first slice: …"*, *"Output: …"*, *"Result: …"* — use the **Statement Bar** component (`3718:1384`) from [`slide-components.md`](../figma/slide-components.md). **Never recreate the dark bar by hand.**
+
+Pick the variant by text length: `rows=1` (`3706:1375`, 1752×80) for one line, `rows=2` (`3718:1385`, 1752×126) for two lines.
+
+Place at x=84 (full-width with slide margin), y just above the footer (≈ 870 for 1 row, ≈ 824 for 2 rows). Pairs well with the card-row layouts.
+
+---
+
 ## Statement / conclusion slides
 
 When the slide is **just a headline + one supporting sentence** — manifestos, theses, section transitions, closing statements — do **not** use the Content template with the card grid. Use the dedicated **Conclusions / Statement Slide** component (`3705:722`, default variant `3705:721`) from [`slide-components.md`](../figma/slide-components.md).

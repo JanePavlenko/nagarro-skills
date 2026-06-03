@@ -104,6 +104,53 @@ populateFooter(slide, ["Digital Design Strategy", "Project Name", "June 2026"]);
 
 ---
 
+### Statement Bar — `3718:1384` (COMPONENT_SET)
+
+A full-width dark callout bar that closes a slide with one emphatic sentence — "Workshop decision: …", "Recommended first slice: …", "Output: …", "Result: …". Use it whenever a content slide ends with a single takeaway line that needs visual weight.
+
+| Variant | Node ID | Size | Use when |
+|---|---|---|---|
+| `rows=1` | `3706:1375` | 1752 × 80 px | One short sentence (≤ ~110 chars) |
+| `rows=2` | `3718:1385` | 1752 × 126 px | Sentence wraps to two lines |
+
+**Anatomy:**
+- Background: `#01070E` (Petrol Black, brand variable), border-radius **8 px**
+- Padding: 24 top / 24 bottom / 10 left / 10 right (text auto-centers horizontally with ~183px effective margin)
+- Text: `Equip Regular`, 24 pt, white, centered
+
+**Anchor in a content slide:**
+- Slide width 1920 → bar centered with 84 px slide-edge margin → x = **84**
+- Vertical position: snap **above** the slide footer (which sits at y = 968). For a 1-row bar place at y ≈ 870, for 2-row place at y ≈ 824. If cards sit above it, set bar y = card.bottom + 32.
+
+**How to use:**
+```javascript
+// Pick the variant by text length
+const set = await figma.getNodeByIdAsync("3718:1384");      // COMPONENT_SET
+const rows1 = set.defaultVariant ?? await figma.getNodeByIdAsync("3706:1375");
+const inst = rows1.createInstance();
+slide.appendChild(inst);
+inst.x = 84; inst.y = 870;
+
+// Set the sentence — find the single TEXT child
+const t = inst.findOne(n => n.type === "TEXT");
+await setText(t, "Workshop decision: pick one production slice, one user cohort, the systems involved, the first release boundary and the KPI baseline.");
+
+// If it wraps, swap to rows=2
+if (t.height > 40) {
+  inst.setProperties({ rows: "2" });   // or recreate from variant 3718:1385
+  inst.y = 824;
+}
+```
+
+**Rules:**
+- **Always fetch this component** — never recreate the dark bar with `createFrame` + manual fills. We did this on the Proof journeys slides and it's now retired.
+- Sentence content: starts with a label-style lead-in ("Workshop decision:", "Recommended first slice:", "Output:", "Result:") followed by the takeaway. Keep it under ~30 words.
+- Pick `rows=1` first; if the text wraps in the variant, switch to `rows=2`.
+- One statement bar per slide max — it's a closing punctuation mark.
+- Pair well with: card-row slides, before/after diagrams, framework slides. Don't pair with the Statement Slide (`3705:721`) — that layout already is the statement.
+
+---
+
 ### Card Section / Set of Cards — `3620:1204` (COMPONENT)
 
 Three `Card Section (Icon=true)` instances in a horizontal row. The pre-built 3-card layout.
