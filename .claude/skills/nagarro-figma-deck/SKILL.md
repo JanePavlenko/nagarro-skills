@@ -36,9 +36,17 @@ Ask for any missing inputs using `AskUserQuestion`. You need:
 
 ## Step 2 — Plan the slide sequence
 
+For each slide in the brief, decide which layout to use **in this order**:
+
+1. **Catalog match.** Read [`slide-decks/figma/layouts.md`](../../../slide-decks/figma/layouts.md). For the slide's content shape (eyebrow + title + N cards / quote / table / flow / stat grid / etc.) pick the layout whose **slot contract** matches. This is the default path — never skip it.
+2. **Atomic component fit.** If no full layout matches but the content is one of the documented patterns (3/4/6/8 cards, process steps, statement bar, table, conclusion slide, progress banner), clone `Content - Title + Body / Light` (`3139:797`) and drop in components from [`slide-decks/figma/slide-components.md`](../../../slide-decks/figma/slide-components.md) following [`slide-decks/slide-rules/cards-and-process.md`](../../../slide-decks/slide-rules/cards-and-process.md).
+3. **Create-new recipe.** Only if neither 1 nor 2 fits, follow [`slide-decks/figma/create-new.md`](../../../slide-decks/figma/create-new.md) to compose a new component using brand tokens. Never draw without that recipe.
+
 Produce a numbered slide plan. For each slide:
-- The exact template frame name from the Figma file
+- The layout name + node ID (or "Content + atomic components" / "Create-new") and *why*
 - A one-line content summary
+
+> **Do not default to "Content + 3 cards" for everything.** That was the old behavior and led to repetitive, force-fit decks. The catalog has ~90 layouts — most slides should map to one of them.
 
 ### Index slide rule
 Include an Index slide only when **both** apply:
