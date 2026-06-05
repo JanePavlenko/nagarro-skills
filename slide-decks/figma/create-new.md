@@ -34,6 +34,13 @@ If yes to any of these, **stop** — use the existing pattern. The composition p
 
 **Rule:** never start a new element outside the content area, and always snap left edges to a 12-column grid line. Column width = `(1752 − 11 × 24) / 12 ≈ 124 px`. Single column = 124, two = 272, three = 420, four = 568, six = 864.
 
+**Card-row anchor rule (mandatory):** Every multi-card row starts at **x = 90** — the same left edge as the slide title. Never center a card row. Cards expand to fill the 90 → 1830 content area (1740 px). Per-card width = `(1740 − (N − 1) × 24) / N`:
+- 2 cards → 858 px each
+- 3 cards → 564 px each
+- 4 cards → 417 px each
+- 5 cards → 328 px each
+- 6 cards → 270 px each
+
 ---
 
 ## Step 2 — Use only token colors

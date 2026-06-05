@@ -23,6 +23,21 @@ A content card with a title, body text, and an optional icon. Used as the base u
 - Title: 34px Equip Extended Medium, `#010716`
 - Body: 20px Equip Regular, `#535457`, line-height 1.4
 
+**Grid alignment rule (mandatory):**
+- The card row **starts at x = 90** — the same left edge as the slide title. Never center the row.
+- The row fills the full content area: **x = 90 to x = 1830** (width = 1740 px).
+- Per-card width = `(1740 − (N − 1) × 24) / N` where N is the column count and 24 px is the column gap.
+
+| N (cols) | Card width | Use case |
+|---|---|---|
+| 2 | 858 | Two-up cards (e.g. mockup signals) |
+| 3 | 564 | 3-card grid or 3×N grid |
+| 4 | 417 | 4-card single row |
+| 5 | 328 | 5-card chain (rare) |
+| 6 | 270 | 6-card single row (dense) |
+
+> **Why x=90 and not centered?** Centering creates an inconsistent gutter between the title (anchored at 90) and the card row, breaking visual alignment across slides. The card row always shares the title's left edge.
+
 **Production layout (when used on a slide — overrides native padding):**
 | Property | Value | Notes |
 |---|---|---|
@@ -595,6 +610,11 @@ place(cardTrue,  frame, 1276, 395, 547, 290); // Step 3 (no arrow)
 The reusable pattern for **any 3/4/6 card row**: clone a base content template, place card instances, detach them so inner layers can be repositioned, force title + body to hug their content, then resize every card to the row's tallest height.
 
 ```javascript
+// Grid alignment — card row starts at x=90 (matches title left edge), fills 1740 wide
+const X_LEFT      = 90;
+const CONTENT_W   = 1740;
+const GAP_COL     = 24;
+// Per-card width derived from column count: CARD_W = (CONTENT_W − (N−1) × GAP_COL) / N
 // Constants (the production layout above)
 const CARD_W      = 547;
 const PAD_X       = 40;
