@@ -163,6 +163,136 @@ Every layout shares the same **footer slot group** (omit on covers / chapter / o
 
 ---
 
+## Diagrams
+
+### `Diagram - Flow Scheme, Simple / Light` — `1023:3254`
+**Use for:** Simple horizontal flow with a small number of labeled nodes and a short caption. Use when the slide is *"A → B → C"* with one supporting sentence (not a full chevron banner).
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `diagram-note` | text(60) | (90, 694, 280, 40) | Small caption above/below the flow |
+| `diagram-node` × N | text(20) | row at y≈748, 73 × 73 each | Short labels — 1–2 words each. Native shows 3 nodes; auto-layout adds more if needed |
+| `Layout` | bg | full slide | Don't touch |
+| `footer.*` | text | y=996 | |
+
+> The internal graph + arrow vectors are part of the template — don't redraw them. If the content has 5+ nodes, prefer the **Progress Banner** atomic component instead.
+
+### `Diagram - Architecture Flow / Light` — `1050:9267`
+**Use for:** Architecture / system flow with stacked layers (e.g. *Experience → Context → Systems → Telemetry*). The `graph` group holds boxes + arrows; the `slide-content` is the heading area above.
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `slide-content` → title | text | (84, 186, 1751, 80) | 64pt title |
+| `graph` group | shapes + labels | (89, 368, 1741, 504) | Editable in place — replace box labels and arrow labels; don't add new shapes |
+| `footer.*` | text | y=996 | |
+
+> The graph's internal box labels and arrow labels are individual TEXT nodes — drill into the group to populate them. Don't `createFrame` extra boxes; if you need more boxes than the template provides, this layout isn't the right pick.
+
+---
+
+## Infographics
+
+### `Infographic - 3 Icons + Copy / Light` — `3052:4765`
+**Use for:** Section intro that pairs a short headline + supporting paragraph at top with **3 icon + label + body** tiles below. Common for "Multi-X, Multi-Y, Multi-Z" framings.
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `chart-title` | text(60) | (90, 198, 1595, 80) | 64pt H1 |
+| `body` (intro) | richtext | (90, 320, 1598, 124) | 24pt supporting paragraph |
+| `chart-group` × 3 | icon visuals | (90 / 676 / 1272, 554) | Icon graphics, don't redraw |
+| `label-1/2/3` | text(20) | (90 / 676 / 1272, 734, 560, 40) | 32pt Equip Extended Medium — short headers (1–2 words) |
+| `body-1/2/3` | text(multi) | (90 / 676 / 1272, 806, 560, 93) | 24pt Equip Regular — 1–2 sentence descriptions |
+| `footer.*` | text | y=996 | |
+
+### `Infographic - Proportional Circles / Light` — `999:18436`
+**Use for:** Single hero stat displayed as overlapping circles, with surrounding annotation labels. Use when one big percentage is the message.
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `Percentage` | text(6) | (753, 485, 402, 128) | 128pt; the hero number (e.g. "75%") |
+| `Container` × 3 | text labels | scattered around the circles | Short annotation chips |
+| `Layout` | bg | full slide | |
+| `footer.*` | text | y=996 | |
+
+---
+
+## Tables
+
+### `Table - Multi-Column Data / Light` — `999:14956`
+**Use for:** Dense 4-column data table (e.g. Category / Sub-category / Description / Licensing). Built on the canonical content area at x=84, full-width.
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| Header row | text(20) × 4 | y=197; col x = 94 / 366 / 859 / 1353 | 16pt header labels |
+| Data rows | text × 4 cols | rows at y≈300, 485, 612, 665, 718, … | 16pt body; rows already styled — populate text, don't redraw |
+| `table` frame | container | (84, 185, 1752, 569) | Native shows multiple rows; many are pre-filled with sample data — overwrite |
+
+> For 3-column tables (decision matrices), use the **Table atomic component** (`3734:2374`, `cols=3`) — that one has a built-in mechanism to hide unused rows. This *Multi-Column Data* layout is a richer slide-level template for denser content.
+
+---
+
+## Timelines
+
+### `Timeline - 4 Columns, Block Layout / Light` — `999:2181`
+**Use for:** A 4-phase timeline where each phase is a card with a sprint/phase label, dates, and bullet-pointed work. Use for project plans and quarterly roadmaps.
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `timeline layout` | container | (84, 236, 1752, 655) | Holds the 4-phase strip |
+| Phase title (e.g. "Sprint 1") | text(30) | per-column in `content` frame | 32pt headers; one per phase |
+| Phase sub (e.g. "Sprint 2") | text(20) | 14pt | Smaller sub-label per phase |
+| `content` | container | (84, 281, 1752, 610) | All editable text lives inside |
+| `footer.*` | text | y=996 | |
+
+> Each phase column holds a list of bullet items (visible after deeper inspection). Populate by finding the per-phase text nodes by their column position; don't restructure the column layout.
+
+---
+
+## Our Partners
+
+### `Our Partners - 12 Logos (3×4) + Copy / Light` — `956:32333`
+**Use for:** Credentials slide — a short paragraph on the left, a 3×4 logo grid on the right.
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `Copy` | richtext | (84, 383, 568, 285) | 24pt paragraph; one short sentence + maybe a CTA |
+| `logo-grid` | image grid | (676, 169, 1157, 713) | 3 cols × 4 rows of partner logos; swap each logo's image fill |
+| `footer.*` | text | y=996 | |
+
+> Use the supplied partner logo components from the Local Components page when filling the grid; don't import outside logos.
+
+---
+
+## Why Nagarro
+
+### `Why Nagarro - Headline Top, 3 Col Body / Light` — `1045:32964`
+**Use for:** "Why us" framing — single headline followed by 3 parallel reasoning columns (e.g. *Relationship / Expertise / Experience*).
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `why-title` | text(80) | (84, 259, 1224, 160) | 64pt headline; wraps to 2 lines |
+| `why-body-1` | richtext | (84, 484, 568, 336) | 18pt; ~120 words per column |
+| `why-body-2` | richtext | (682, 484, 568, 288) | 18pt |
+| `why-body-3` | richtext | (1280, 484, 568, 336) | 18pt |
+| `footer.*` | text | y=996 | |
+
+---
+
+## Team
+
+### `Team Member - Bio + Photo / Light` — `747:1813`
+**Use for:** Single-person bio slide. Half-bleed photo on the right, name + role + bio paragraph on the left.
+
+| Slot | Type | Anchor | Notes |
+|---|---|---|---|
+| `member-name` | text(30) | (84, 243, 625, 80) | 80pt Equip Extended Bold |
+| `member-role` | text(30) | (84, 335, 200, 32) | 24pt Equip Extended Medium |
+| `member-bio-intro` | richtext | (84, 415, 888, 94+) | 36pt opening sentence; supporting bio continues below |
+| `CV Photo` | image | (1244, 0, 676, 1080) | Full-height portrait photo on the right; swap the image fill |
+| `footer.*` | text | y=996 | |
+
+---
+
 ## How to use this catalog
 
 ```javascript
